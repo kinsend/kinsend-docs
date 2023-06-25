@@ -1,0 +1,131 @@
+# This Github workflow pushes the changes to the Kinsend Docs to S3.
+name: build-and-deploy
+
+on:
+  repository_dispatch:
+    types: [ "docs:push-command" ]
+
+  # Build PRs
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs.yaml'
+
+  # On push event
+  push:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs.yaml'
+
+  workflow_dispatch:
+env:
+  DEV_AWS_ACCOUNT_ID: 874822220446
+  AWS_REGION: us-east-1
+  GIT_REF: ${{ inputs.BRANCH != '' && inputs.BRANCH || github.event.client_payload.pull_request.head.sha }}
+  VERSION_REF: ${{ inputs.BRANCH != '' && inputs.BRANCH || format('PR-{0}', github.event.client_payload.github.payload.issue.number) }}
+
+# These permissions are required to allow writing comments and reporting check status.
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  statuses: write
+  issues: write
+  checks: write
+
+jobs:
+  build-docker-image:
+    runs-on: ks-linux
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.GIT_REF }}
+
+      - name: Get git commit hash
+        uses: pr-mpt/actions-commit-hash@v2
+        id: commit
+
+      - name: Configure dynamic variables
+        id: vars
+        run: |
+          # For local dev.
+          # GITHUB_OUTPUT=/dev/stdout
+          ref=${{ env.GIT_REF }}
+          echo "Ref => $ref"
+          
+          accountId=${{ env.DEV_AWS_ACCOUNT_ID }}
+          roleId="dev"
+          version=1.0.0-${{ env.VERSION_REF }}-${{ steps.commit.outputs.short }}
+          bucket=kinsend-docs-dev-cloudfront
+          
+          echo "Account ID: ${accountId}"
+          echo "Role: ${roleId}"
+          echo "Version: ${version}"
+          echo "Bucket: ${bucket}"
+          
+          echo "accountId=$accountId" >> $GITHUB_OUTPUT 
+          echo "roleId=$roleId" >> $GITHUB_OUTPUT
+          echo "bucket=$bucket" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ steps.vars.outputs.accountId }}:role/kinsend-${{ steps.vars.outputs.roleId }}
+          role-skip-session-tagging: true
+          role-duration-seconds: 900
+
+      - name: Debug
+        run: |
+          tree
+          ls -al
+
+      - name: Build mkdocs
+        run: docker-compose up build
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync site/ s3://${{ steps.vars.outputs.bucket }} --delete --cache-control no-cache
+
+      - name: Post job report comment reaction
+        uses: peter-evans/create-or-update-comment@v3
+        if: ${{ always() && (github.event.client_payload.slash_command.command != '') }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          reactions: ${{ job.status == 'success' && 'hooray' || '-1' }}
+
+      - name: Post job report comment failure
+        uses: peter-evans/create-or-update-comment@v3
+        if: ${{ failure() && (github.event.client_payload.slash_command.command != '') }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          reactions: ${{ job.status == 'success' && 'hooray' || '-1' }}
+          body: |
+            > 🔴 Failed to push to S3. For more details check the [build log](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+
+      - name: Post job report add comment on success push
+        uses: peter-evans/create-or-update-comment@v3
+        if: ${{ success() && (github.event.client_payload.slash_command.command != '') }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          body: |
+            #### Status
+            
+            🟢 Pushed revision `${{ steps.vars.outputs.version }}` to [s3://${{ steps.vars.outputs.bucket }}](https://s3.console.aws.amazon.com/s3/buckets/${{ steps.vars.outputs.bucket }}?region=us-east-1&tab=objects).
+            
+            #### Build log
+            
+            * For more details check the [build log](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            
+            #### Test
+            
+            * [Kinsend.io Documentation](https://docs.dev.kinsend.io/)
