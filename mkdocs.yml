@@ -1,0 +1,22 @@
+site_name: Kinsend.io Knowledge Base
+
+theme:
+  name: material
+  logo: assets/images/ks-1-192x192.png
+  features:
+    - navigation.tabs
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: indigo
+      scheme: default
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode

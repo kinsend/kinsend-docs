@@ -1,0 +1,28 @@
+name: command-dispatch
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+#permissions: write-all
+jobs:
+  slashCommandDispatch:
+    runs-on: ubuntu-latest
+    if: |
+      contains('["carlspring", "steve-todorov"]', github.triggering_actor) &&
+      github.event.issue.pull_request
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config: >
+            [
+              {
+                "command": "help",
+                "permission": "write",
+                "issue_type": "pull-request"
+              }
+            ]
