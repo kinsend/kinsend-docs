@@ -39,4 +39,3 @@ Integrations tests should be implemented for functionality related to our third-
 
 
 ## Smoke Tests
-
