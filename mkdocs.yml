@@ -1,5 +1,6 @@
 site_name: Kinsend.io Knowledge Base
 site_url: https://docs.dev.kinsend.io/
+repo_url: https://github.com/kinsend/kinsend-docs
 use_directory_urls: false
 
 markdown_extensions:
@@ -8,6 +9,10 @@ markdown_extensions:
 theme:
   name: material
   logo: assets/images/ks-1-192x192.png
+
+  icon:
+    repo: fontawesome/brands/github
+
   features:
     - announce.dismiss
     - content.tooltips
