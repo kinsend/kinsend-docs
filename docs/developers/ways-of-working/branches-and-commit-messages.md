@@ -7,23 +7,28 @@ We are basing pull requests off the following branches:
   * `master`
   * `develop`
 
-### `master`
+### The `master` branch
 
 This is the main branch, which is (currently) used for production deployments.
 
-### `develop`
+### The `develop` branch
 
 This is the main development branch, which is used for development deployments.
 
-### Feature Branches
+## Feature Branches
 
-All feature branches for issues raised in the same repository, you should use the following naming convention:
+When developing a feature one must:
+
+1. Have raised a ticket for the feature that is being worked on
+2. Create a dedicated feature branch for the same issue.
+
+Please use the following convention for naming the branch:
 
 ```
 issue/${issue-number}/${issue-description}
 ```
 
-For example:
+For example, if your ticket number is `1234` and it is about logging, then the branch name should be something like the following:
 
 ```
 issue/1/add-logging
@@ -49,7 +54,7 @@ kinsend/${repositoryName}#${issue-number}: Add logging
 For example:
 
 ```
-kinsend/kinsend-be#$123: Add logging
+kinsend/kinsend-be#123: Add logging
 
 * Set up logging.
 * Added more detailed logging to the `doSomething` method.
@@ -66,6 +71,21 @@ kinsend/${otherRepositoryName}#${other-issue-number}: Add detailed logging for t
 * Set up logging.
 * Added more detailed logging to the `doSomething` method.
 ```
+
+In case all commits are related to tickets within the same repository, then you may use `#123: Add Logging` instead:
+
+```
+#123: Add logging
+
+* Set up logging.
+* Added more detailed logging to the `doSomething` method.
+
+#234: Fixed another task.
+
+* Did something important here.
+```
+
+This approach to commit messages allows easier navigation and most importantly a fast way to revert commits related to a new feature in case of disaster.
 
 ## Notes
 
