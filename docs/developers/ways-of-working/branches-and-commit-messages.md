@@ -86,16 +86,3 @@ In case all commits are related to tickets within the same repository, then you 
 ```
 
 This approach to commit messages allows easier navigation and most importantly a fast way to revert commits related to a new feature in case of disaster.
-
-## Notes
-
-We should optimally move towards `master`-based development, where all pull requests are based off `master` branch.
-This will:
-
-  * Allow us to merge and deploy pull requests faster into the production environment, as it won't require an intermediate
-    merge into the `develop` branch first and then an additional merge into the `master`.
-  * Reduce the number of merge conflicts, as things would be easier to keep in sync.
-  * Reduce the number of branches that need to be maintained.
-  
-We should instead produce versioned releases of the `master` using the commit hashes and make the deployments to the
-different environments instead using these hashed versions.
