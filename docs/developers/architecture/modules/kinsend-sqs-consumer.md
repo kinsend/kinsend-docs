@@ -17,9 +17,14 @@ Github workflows will be triggerred on the following events:
 
 ### Commands
 
-* To build and push the code to EC2, post a comment under a pull request with the following command:
+* To publish a new Docker image to the ECR, post a comment under a pull request with the following command:
 ```
-/ec2:push
+/docker:push
+```
+
+* To build and deploy the code to EC2, post a comment under a pull request with the following command:
+```
+/ec2:deploy
 ```
 
 ## Building
