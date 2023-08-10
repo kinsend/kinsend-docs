@@ -22,4 +22,10 @@ Github workflows will be triggerred on the following events:
 mkdocs serve
 ```
 
+* To build and publish the documentation manually, execute:
+```
+docker-compose up build 
+aws-vault exec kinsend-dev -- aws s3 cp --recursive --cache-control no-cache . s3://kinsend-docs-dev-cloudfront/
+```
+
 [kinsend/kinsend-docs]: https://github.com/kinsend/kinsend-docs
