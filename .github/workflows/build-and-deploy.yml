@@ -44,7 +44,7 @@ jobs:
           ref: ${{ env.GIT_REF }}
 
       - name: Get git commit hash
-        uses: pr-mpt/actions-commit-hash@v2
+        uses: pr-mpt/actions-commit-hash@v3
         id: commit
 
       - name: Configure dynamic variables
