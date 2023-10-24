@@ -45,6 +45,7 @@
 
 ## Additional Notes
 **Contract Plans**
+
 - Will be billed monthly but with a 12 month minimum contract agreement
 - Same 3 plans (Starter, Growth, High Volume), but at cheaper flat fees and message rates
     - Starter will be $89.99/mo with a $0.011 / message rate
@@ -53,6 +54,7 @@
 - There will need to be an automated sendgrid contract generated that is associated with this plan that will automatically be sent to the client’s email once they select a contract plan and fill out the initial form. There will need to be an event that is triggered once they have signed the contract and verified their email address to allow them to login to their respective account and pay the first month’s fee
 	
 **Annual Plans**
+
 - Will be billed upfront for 12 months 
 - Same 3 plans (Starter, Growth, High Volume), but at cheaper flat fees and message rates
     - Starter will be $960/yr with a $0.012 / message rate
@@ -65,6 +67,7 @@
 - Updates will NOT be charged upfront and will just be calculated into monthly usage to determine if an overage should be charged at the end of the month or not
 	
 **A2P 10DLC Registration**
+
 - Monthly plan will not begin rebilling cycle until 30 days AFTER A2P 10DLC approval
 - Annual plan will not begin rebilling cycle until 365 days AFTER A2P 10DLC approval
 - A2P Registration will be charged as a separate charge from initial KinSend sign up
