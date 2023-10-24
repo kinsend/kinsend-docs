@@ -76,7 +76,7 @@ Options include:
 
 ## 5. Contact Filters
 
-Combining multiple filters for precise results:
+For more details on filters, see [filters](/developers/architecture/functionality/filters.html).
 
 * Age
 * Archived Contact
