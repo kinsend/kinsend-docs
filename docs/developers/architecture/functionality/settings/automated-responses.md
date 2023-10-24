@@ -1,19 +1,42 @@
 # Automated Responses
 
-Automated responses are made up of 2 components.
+Automated responses comprise two main components:
 
-**First contact** - This handles all phone numbers that contact our user for the first time (they do not exist in our contact's phone book)
-The flow for First Contact is as follows:
+---
 
-1. The trigger is the first message or phone call from a non-contact
-2. A custom message is immediately sent to the non-contact which must contain an opt-in form which a user can set up in the forms and widgets page. The forms and widgets page always has at least 1 default form that is made upon account creation with name, phone and email being the default questions in the form.
-3. The flow then waits 30 minutes
-4. The flow does a check to see if the phone number is now associated with a contact. If it is then the flow is exited.
-5. If the flow does not see the phone number associated with a contact, another custom message is sent. This message does not have to include the form if the user does not want it to. Whether the contact opts in or not, the flow is then exited
+## 1. First Contact
 
-**Keyword responses** - This handles automated responses to any texts received by our user from their existing subscribers which matches the exact character sequence place in the "Rule input"
+Handling all initial contacts from phone numbers not in the user's phone book.
 
-1. The trigger for these responses is whatever the user sets up to be a trigger. This trigger can be an emoji (i.e 😄), a hashtag (i.e #15Discount) or any regex response (i.e TAKE15)
-2. The response will be whatever the user inputs into the "Auto Reponse" input
-3. A user can tag anyone with whatever they would like based on the Keyword message they receive
-4. Order of priority of the auto responses is based on the listed order. For example if I have 2 different responses for "Hello" and "TAKE15", but a subscriber sends our user "Hello TAKE15", then the subscriber should only receive the highest priority response of the 2. Regex Rules take priority over Hashtag / Emoji rules. Regex rules are prioritized by the highest level rule to the lowest level rule. Hashtag / Emoji rules are prioritized by the highest level rule to the lowest level rule.
+- **Trigger**: First message or call from an unknown contact.
+  
+- **Action**:
+  
+  1. An immediate custom message is dispatched, always containing an opt-in form configurable in the "Forms and Widgets" page. (Note: This page defaults to having one form with fields: name, phone, and email, upon account creation.)
+  2. Wait for 30 minutes.
+  3. Check if the phone number has been associated with a contact.
+     - If it is, exit the flow.
+     - If not, send another custom message (may or may not contain the form based on user preference). Then, exit the flow regardless of opt-in status.
+
+---
+
+## 2. Keyword Responses
+
+Handles automated reactions to specific sequences received from known contacts or subscribers.
+
+- **Trigger**: Defined by the user, which can be:
+  - An emoji (e.g., 😄)
+  - A hashtag (e.g., #15Discount)
+  - A regex pattern (e.g., TAKE15)
+
+- **Action**:
+  
+  1. Send the user-defined message from the "Auto Response" field.
+  2. Users have the capability to assign tags to any contact based on the received keyword message.
+  
+- **Priority**:
+
+  - Rules are applied based on their listing order.
+  - For conflicting triggers in a single message (e.g., "Hello TAKE15"), only the highest priority rule gets applied.
+    - Regex rules > Hashtag/Emoji rules.
+    - Within each category, it goes from the topmost (highest) rule to the bottommost.
