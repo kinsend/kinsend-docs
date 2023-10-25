@@ -39,12 +39,14 @@ Crafting messages involves creating tailored content to be sent out as part of t
 
 ### Time-based Delays
 Allows for a specific delay based on units of time. Users can define the delay in terms of:
+
 - **Hours**
 - **Minutes**
 - **Seconds**
 
 ### Trigger-based Delays
 Delays that activate based on specific conditions or moments in time. They include:
+
 - **Until Next Day**: 
     - **Duration**: Until the start of the next day.
     - **Time**: Allows users to specify a time, for example, 8:00 AM.
