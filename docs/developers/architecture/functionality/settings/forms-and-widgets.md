@@ -1,5 +1,10 @@
 # Forms & Widgets
 
+- [Forms test cases](https://github.com/kinsend/kinsend-be/issues/175)
+- [CNAMEs test cases](https://github.com/kinsend/kinsend-be/issues/165)
+- [Forms submissions test cases](https://github.com/kinsend/kinsend-be/issues/168)
+- [Custom fields test cases](https://github.com/kinsend/kinsend-be/issues/183)
+
 ## **Overview**
 The "Forms" feature in KinSend offers users the capability to create opt-in landing pages. These are designed to capture lead information, which can be pivotal for text message marketing campaigns in the future.
 
@@ -8,16 +13,6 @@ The "Forms" feature in KinSend offers users the capability to create opt-in land
 1. **Customization**: Forms can be tailored to inquire virtually any information from a potential lead.
 2. **Multiple Forms Creation**: Users have the flexibility to construct as many diverse forms as they need.
 3. **Custom Domain Name**: Users can select a custom CNAME for their Forms under the domain name `app.kinsend.io`.
-
-## **Interface Preview**
-
-![Forms & Widgets](first_image_url_here)
-
-*Forms & Widgets Interface*
-
-![New Form](second_image_url_here)
-
-*Creating a New Form*
 
 ## **Detailed Features**
 

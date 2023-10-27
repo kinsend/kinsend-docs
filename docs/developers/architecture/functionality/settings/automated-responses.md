@@ -1,6 +1,7 @@
 # Automated Responses
 
-[BE Test cases to implement](https://github.com/kinsend/kinsend-be/issues/170)
+- [First contact test cases](https://github.com/kinsend/kinsend-be/issues/187)
+- [Keyword responses test cases](https://github.com/kinsend/kinsend-be/issues/170)
 
 Automated responses comprise two main components:
 

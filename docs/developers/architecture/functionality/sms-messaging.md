@@ -1,4 +1,10 @@
 # SMS messaging
+
+- [Messages test cases](https://github.com/kinsend/kinsend-be/issues/181)
+- [SMS test cases](https://github.com/kinsend/kinsend-be/issues/177)
+- [Images test cases](https://github.com/kinsend/kinsend-be/issues/176)
+- [Merge tags test cases](https://github.com/kinsend/kinsend-be/issues/155)
+
 ## 1.1 Overview
 - **1 to 1 SMS messaging**: Occurs on the `/message` page.
 - **User's message threads**: All encompassed on this page.

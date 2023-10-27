@@ -1,5 +1,7 @@
 # Contacts
 
+[Contacts test cases](https://github.com/kinsend/kinsend-be/issues/185)
+
 ## 1. Contacts Grid
 
 * **Total Contacts**: Displayed prominently above the grid.

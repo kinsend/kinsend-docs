@@ -1,5 +1,8 @@
 # Tags & Segments
 
+[Tags test cases](https://github.com/kinsend/kinsend-be/issues/184)
+[Segments test cases](https://github.com/kinsend/kinsend-be/issues/178)
+
 The **Tags & Segments** feature in Kinsend allows users to categorize and manage their contacts effectively. Tags are a pivotal tool for targeting specific contacts within an [automation](/developers/architecture/functionality/automations.html) or [update](/developers/architecture/functionality/updates.html) campaign.
 
 ## Overview

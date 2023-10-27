@@ -1,5 +1,7 @@
 # Automations
 
+[Automations test cases](https://github.com/kinsend/kinsend-be/issues/173)
+
 ## Overview
 The "Automations" feature in Kinsend offers a flexible way to craft automated text message workflows. Designed with user experience in mind, it allows users to intuitively create, manage, and visualize multiple text message automation funnels.
 

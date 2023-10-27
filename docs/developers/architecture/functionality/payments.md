@@ -1,5 +1,8 @@
 # Payments
 
+[Payments test cases](https://github.com/kinsend/kinsend-be/issues/167)
+[Subscriptions test cases](https://github.com/kinsend/kinsend-be/issues/164)
+
 ## Monthly Payments:
 
 - Minimum monthly payment from clients should be the monthly subscription

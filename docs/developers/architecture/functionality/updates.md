@@ -1,5 +1,7 @@
 # Updates & SQS
 
+[Updates test cases](https://github.com/kinsend/kinsend-be/issues/186)
+
 The Updates feature in **Kinsend** allows you to send scheduled or immediate messages to your users. This functionality is essential for sending out bulk SMS messages or individual updates.
 
 ## Send An Update
