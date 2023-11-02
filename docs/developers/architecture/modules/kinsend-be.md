@@ -9,34 +9,66 @@ and serves the content over HTTPS.
 
 ### Repository
 
-The code is located under the [kinsend/kinsend-be] repository.
+The code is located under the [kinsend/kinsend-be] repository. 
+
+The default branch for `developers` is called `develop`. Your feature branches should be forked from the `develop`
+branch and the PRs should also target the `develop` branch.
 
 ### Workflows
 
 Github workflows will be triggerred on the following events:
 
-* Pull request against the `master` branch.
+* Pull request against the `master` branch (this is our `production` branch, DO NOT TARGET IT!)
 * Pull request against the `develop` branch.
 
-### Commands
+### PR Comment commands
 
 * To publish a new Docker image to the ECR, post a comment under a pull request with the following command:
-```
-/docker:push
-```
+  ```
+  /docker:push
+  ```
 
 * To build and deploy the Docker image to ECS, post a comment under a pull request with the following command:
-```
-/ecs:deploy
-```
+  ```
+  /ecs:deploy
+  ```
 
 ## Building
 
 ### Code
 
+  ```bash
+npm run build
+```
+
 ### Docker Image
 
+* You can build a local image via `docker-compose build` or if you want to run in docker -- `docker-compose up`
+
 ## Testing
+
+* To run `unit tests`:
+  ```bash
+  npm run test:unit
+  ```
+* To run `integration tests`:
+  ```bash
+  npm run test:integration
+  ```
+  This will automatically download MongoDB and run it in the background. 
+  If it fails to download it means there is no [official MongoDB package](https://www.mongodb.com/try/download/community) available for your OS/distribution. 
+  In that case you should install MongoDB on your system and set the binary via `MONGODB_BIN=/usr/bin/mongod`.  
+    
+  Here's an example for Ubuntu 23.04.
+  ```bash
+  MONGODB_BIN=/usr/bin/mongod npm run test:integration
+  ```
+
+
+* To run all tests 
+  ```bash
+  npm run test
+  ```
 
 ## Environment Details
 
